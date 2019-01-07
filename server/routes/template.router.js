@@ -6,13 +6,30 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', (req, res) => {
-    
+    let queryText = `SELECT * FROM events;`
+    pool.query(queryText).then((result) => {
+        res.send(result.rows)
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    })
 });
 
 /**
  * POST route template
  */
 router.post('/', (req, res) => {
+    let newEvent = req.body;
+    console.log('testing location', req.body);
+    const queryText = `INSERT INTO "events" ("name", "date", "time", "description", "location") VALUES ($1, $2, $3, $4, $5);`
+    pool.query(queryText, [newEvent.name, newEvent.date, newEvent.time, newEvent.description, newEvent.location ] ) 
+    .then(result => {
+        res.sendStatus(200);
+
+    }).catch(error => {
+        console.log('error on post query', error);
+        res.sendStatus(500);
+    })
 
 });
 

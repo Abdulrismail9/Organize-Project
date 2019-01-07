@@ -17,7 +17,11 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 
+
 import './App.css';
+import Admin from '../Admin/Admin.jsx';
+import eventsPage from '../eventsPage/eventsPage';
+import AdminCreate from '../Admin/AdminCreate';
 
 class App extends Component {
   componentDidMount () {
@@ -54,6 +58,21 @@ class App extends Component {
               exact
               path="/info"
               component={InfoPage}
+            />
+             <ProtectedRoute
+              exact
+              path="/Admin"
+              component={Admin}
+            />
+              <ProtectedRoute
+              exact
+              path="/AdminCreate"
+              component={AdminCreate}
+            />
+             <ProtectedRoute
+              exact
+              path="/eventsPage"
+              component={eventsPage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
