@@ -1,4 +1,4 @@
-const events = (state = {}, action) => {
+const events = (state = [], action) => {
     switch (action.type) {
       case 'SET_EVENTS':
         return action.payload;

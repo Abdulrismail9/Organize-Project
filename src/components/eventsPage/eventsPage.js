@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import EventList from './EventList';
 
 
 class eventsPage extends Component {
@@ -18,6 +19,16 @@ class eventsPage extends Component {
         
         return(
             <div>
+                 {this.props.reduxStore.events.map((event) => {
+                    return (<EventList 
+                        key={event.id} 
+                        id={event.id} 
+                        name={event.name} 
+                        date={event.date} 
+                        time={event.time}
+                        description={event.description}
+                        location={event.location} />);
+                })}
                 
             </div>
         )
