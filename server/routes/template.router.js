@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 /**
- * GET route template
+ * GET route 
  */
 router.get('/', (req, res) => {
     let queryText = `SELECT * FROM events;`
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 });
 
 /**
- * POST route template
+ * POST route 
  */
 router.post('/', (req, res) => {
     let newEvent = req.body;
@@ -32,5 +32,18 @@ router.post('/', (req, res) => {
     })
 
 });
+
+// DELETE route
+router.delete('/:id', (req, res) => {
+    console.log('testing delete route', req.params.id);
+    let id = req.params.id
+    let queryText = `DELETE FROM events WHERE id = $1;`;
+    pool.query(queryText, [id]).then((result) => {
+        res.send(result.rows);
+    }).catch((error) => {
+        console.log('error in delete route', error);
+        res.sendStatus(500)
+    })
+})
 
 module.exports = router;

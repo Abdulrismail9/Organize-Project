@@ -28,6 +28,7 @@ app.use('/api/user', userRouter);
 app.use('/events', templateRouter);
 
 
+
 // Serve static files
 app.use(express.static('build'));
 
