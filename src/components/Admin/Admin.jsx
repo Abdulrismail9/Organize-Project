@@ -6,6 +6,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import './Admin.css';
+
 
 
 const styles = {
@@ -25,7 +27,17 @@ const styles = {
     },
   };
 
+  const inputs = {
+    name: '',
+    date: '',
+    time: '',
+    location: '',
+    description: ''
+}
+
 class Admin extends Component {
+
+    state = inputs;
 
     
     componentDidMount () {
@@ -37,30 +49,54 @@ class Admin extends Component {
     }
 
     removeEvent = (id) => {
-        console.log('in remove event', id);
+        console.log('in remove event', id)
         this.props.dispatch({ type: 'DELETE_EVENT', payload: id})
+    }
+
+    handleChangeFor = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+    editEvent = (eventId) => {
+        const data = {
+            ...this.state,
+            id: eventId
+        }
+        console.log('in edit event')
+        this.props.dispatch({ type: 'EDIT_EVENT', payload: data })
+        this.setState({
+            inputs
+        })   
     }
     render() {
         let eventItems = this.props.reduxStore.events.map((event) => {
             return (
                 <div key={event.id} >
-                {event.name} {event.date}
+                {event.name} 
                 <CardActions>
+               <input type='text' name='name' placeholder='name' onChange={this.handleChangeFor} />
+                <input type='text' name='date' placeholder='date' onChange={this.handleChangeFor} />
+                <input type='text' name='time' placeholder='time' onChange={this.handleChangeFor} />
+                <input type='text' name='location' placeholder='location' onChange={this.handleChangeFor} />
+                <input type='text' name='description' placeholder='description' onChange={this.handleChangeFor} />
+               <Button size="small" variant="contained" color="primary" onClick={() => this.editEvent(event.id)}>Edit</Button>
                <Button size="small" variant="contained" color="secondary" onClick={() => this.removeEvent(event.id)}>Delete</Button>
-               <Button size="small" variant="contained" color="primary" >Edit</Button>
                </CardActions>
                 </div>
             )
         })
         return(
             <div>
-                <div>
+                <div  className="Cbtn">
+                <Button variant="contained" color="secondary" >
                 <Link to="/AdminCreate">
                 Create Event
                 </Link>
+                </Button>
                 </div>
-                <div>
                 Events
+                <div className="cards">
                 <Card>
                 <CardContent>
                {eventItems}
@@ -68,6 +104,7 @@ class Admin extends Component {
                </Card>
                 </div>
             </div>
+            
         )
     }
 }

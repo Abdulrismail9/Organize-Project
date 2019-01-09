@@ -6,7 +6,7 @@ const router = express.Router();
  * GET route 
  */
 router.get('/', (req, res) => {
-    let queryText = `SELECT * FROM events;`
+    let queryText = `SELECT * FROM events ORDER BY id ASC;`
     pool.query(queryText).then((result) => {
         res.send(result.rows)
     }).catch((error) => {
@@ -14,6 +14,18 @@ router.get('/', (req, res) => {
         res.sendStatus(500);
     })
 });
+
+router.get('/org', (req, res) => {
+    let queryText = `SELECT * FROM Organization;`
+    pool.query(queryText).then((result) => {
+        res.send(result.rows)
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    })
+});
+
+
 
 /**
  * POST route 
@@ -45,5 +57,22 @@ router.delete('/:id', (req, res) => {
         res.sendStatus(500)
     })
 })
+
+// PUT route 
+router.put(`/:id`, (req, res) => {
+    const eventId = req.params.id;
+    const {name, date, time, description, location } = req.body;
+    console.log('in put route', req.body);
+    const queryText = `UPDATE events SET "name"=$1, "date"=$2, "time"=$3, "description"=$4, "location"=$5
+    WHERE id=$6;`;
+    pool.query(queryText, [name, date, time, description, location, eventId ] )
+    .then(result => {
+        res.sendStatus(204);
+    })
+    .catch( (error) => {
+        console.log('error in PUT', error);
+        res.sendStatus(500);
+    })
+})// end of PUT route
 
 module.exports = router;
