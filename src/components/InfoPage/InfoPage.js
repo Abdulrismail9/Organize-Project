@@ -19,7 +19,6 @@ class InfoPage extends Component {
         return (
             <div key={org.id} >
             {org.name} {org.description}
-            
             </div>
         )
     })
@@ -27,7 +26,6 @@ class InfoPage extends Component {
             <div>
                {organizationItems}
             </div>
-            
         )
     }
 }

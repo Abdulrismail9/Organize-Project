@@ -1,11 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
  * GET route 
  */
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT * FROM events ORDER BY id ASC;`
     pool.query(queryText).then((result) => {
         res.send(result.rows)
@@ -15,10 +16,30 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/org', (req, res) => {
-    let queryText = `SELECT * FROM Organization;`
+router.get('/org', rejectUnauthenticated, (req, res) => {
+    let queryText = `SELECT * FROM "Organization";`
     pool.query(queryText).then((result) => {
         res.send(result.rows)
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    })
+});
+
+router.get('/convention', rejectUnauthenticated, (req, res) => {
+    let queryText = `SELECT * FROM "Convention";`
+    pool.query(queryText).then((result) => {
+        res.send(result.rows)
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    })
+});
+
+router.get('/count', (req, res) => {
+    let sql = `SELECT * FROM "person";`
+    pool.query(sql).then((response) => {
+        res.send(response.rows)
     }).catch((error) => {
         console.log(error);
         res.sendStatus(500);
@@ -30,11 +51,11 @@ router.get('/org', (req, res) => {
 /**
  * POST route 
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     let newEvent = req.body;
     console.log('testing location', req.body);
-    const queryText = `INSERT INTO "events" ("name", "date", "time", "description", "location") VALUES ($1, $2, $3, $4, $5);`
-    pool.query(queryText, [newEvent.name, newEvent.date, newEvent.time, newEvent.description, newEvent.location ] ) 
+    const queryText = `INSERT INTO "events" ("name", "dates", "time", "description", "location") VALUES ($1, $2, $3, $4, $5);`
+    pool.query(queryText, [newEvent.name, newEvent.dates, newEvent.time, newEvent.description, newEvent.location ] ) 
     .then(result => {
         res.sendStatus(200);
 
@@ -45,8 +66,21 @@ router.post('/', (req, res) => {
 
 });
 
+router.post('/interests', (req, res) => {
+    let sqlText = `INSERT INTO "Going_to_event" ("person_id", "event_id")
+    VALUES ($1, $2)`
+    pool.query(sqlText, [req.body.person_id, req.body.event_id ])
+        .then(result => {
+            res.sendStatus(200);
+        }).catch(err => {
+            console.log('error in post interest query:', err);
+            res.sendStatus(500);
+        })
+
+});
+
 // DELETE route
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
     console.log('testing delete route', req.params.id);
     let id = req.params.id
     let queryText = `DELETE FROM events WHERE id = $1;`;
@@ -58,8 +92,56 @@ router.delete('/:id', (req, res) => {
     })
 })
 
+router.delete('/:id/org', rejectUnauthenticated, (req, res) => {
+    console.log('testing delete route', req.params.id);
+    let id = req.params.id
+    let queryText = `DELETE FROM "Organization" WHERE id = $1;`;
+    pool.query(queryText, [id]).then((result) => {
+        res.send(result.rows);
+    }).catch((error) => {
+        console.log('error in delete route', error);
+        res.sendStatus(500)
+    })
+})
+
+router.delete('/:id/convention', rejectUnauthenticated, (req, res) => {
+    console.log('testing delete route', req.params.id);
+    let id = req.params.id
+    let queryText = `DELETE FROM "Convention" WHERE id = $1;`;
+    pool.query(queryText, [id]).then((result) => {
+        res.send(result.rows);
+    }).catch((error) => {
+        console.log('error in delete route', error);
+        res.sendStatus(500)
+    })
+})
+
+router.delete('/:id/count', (req, res) => {
+    console.log('testing delete route', req.params.id);
+    let id = req.params.id
+    let queryText = `DELETE FROM "person" WHERE id = $1;`;
+    pool.query(queryText, [id]).then((result) => {
+        res.send(result.rows);
+    }).catch((error) => {
+        console.log('error in delete route', error);
+        res.sendStatus(500)
+    })
+})
+
+router.delete('/interest/:id', (req, res) => {
+    console.log('testing DElete route', req.body);
+    let queryText = `DELETE FROM "Going_to_event" WHERE "person_id"=$1 AND "event_id"=$2;`;
+    pool.query(queryText, [req.body.person_id, req.body.event_id]).then((result) => {
+        res.send(result.rows);
+    }).catch((error) => {
+        console.log('error in delete route', error);
+        res.sendStatus(500)
+    })
+})
+
+
 // PUT route 
-router.put(`/:id`, (req, res) => {
+router.put(`/:id`, rejectUnauthenticated, (req, res) => {
     const eventId = req.params.id;
     const {name, date, time, description, location } = req.body;
     console.log('in put route', req.body);
@@ -74,5 +156,56 @@ router.put(`/:id`, (req, res) => {
         res.sendStatus(500);
     })
 })// end of PUT route
+
+router.put(`/:id/org`, rejectUnauthenticated, (req, res) => {
+    const orgId = req.params.id;
+    const {name, description} = req.body;
+    console.log('in put route', req.body);
+    const queryText = `UPDATE "Organization" SET "name"=$1, "description"=$2
+    WHERE id=$3;`;
+    pool.query(queryText, [name, description, orgId ] )
+    .then(result => {
+        res.sendStatus(204);
+    })
+    .catch( (error) => {
+        console.log('error in PUT', error);
+        res.sendStatus(500);
+    })
+})// end of PUT route
+
+router.put(`/:id/convention`, rejectUnauthenticated, (req, res) => {
+    const conventionId = req.params.id;
+    const {name, description} = req.body;
+    console.log('in put route', req.body);
+    const queryText = `UPDATE "Convention" SET "name"=$1, "description"=$2
+    WHERE id=$3;`;
+    pool.query(queryText, [name, description, conventionId ] )
+    .then(result => {
+        res.sendStatus(204);
+    })
+    .catch( (error) => {
+        console.log('error in PUT', error);
+        res.sendStatus(500);
+    })
+})// end of PUT route
+
+router.put(`/:id/admins`, rejectUnauthenticated, (req, res) => {
+    const userId = req.params.id;
+    const {isAdmin } = req.body;
+    console.log('in put route', req.body);
+    const queryText = 
+    `UPDATE "person" SET "admin"=$1  
+    WHERE id=$2 ;`;
+    pool.query(queryText, [ isAdmin, userId] )
+    .then(result => {
+        res.sendStatus(204);
+    })
+    .catch( (error) => {
+        console.log('error in PUT', error);
+        res.sendStatus(500);
+    })
+})// end of PUT route
+
+
 
 module.exports = router;

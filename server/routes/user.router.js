@@ -12,6 +12,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
@@ -39,5 +41,7 @@ router.post('/logout', (req, res) => {
   req.logout();
   res.sendStatus(200);
 });
+
+
 
 module.exports = router;

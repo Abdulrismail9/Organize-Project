@@ -16,13 +16,7 @@ function* AddEvent(action) {
 function* fetchEvents() {
       console.log(' in fetchEvents');
       try{
-        const config = {
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true,
-        };
-
-
-          const results = yield axios.get('/events', config );
+          const results = yield axios.get('/events' );
           yield put({type: 'SET_EVENTS', payload: results.data });
       }
       catch(error) {

@@ -7,6 +7,10 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import './Admin.css';
+import AdminOrganization from './AdminOrganization';
+import AdminConvention from './AdminConvention';
+import AdminUserList from './AdminUserList';
+
 
 
 
@@ -69,6 +73,7 @@ class Admin extends Component {
             inputs
         })   
     }
+    
     render() {
         let eventItems = this.props.reduxStore.events.map((event) => {
             return (
@@ -86,6 +91,7 @@ class Admin extends Component {
                 </div>
             )
         })
+
         return(
             <div>
                 <div  className="Cbtn">
@@ -100,6 +106,30 @@ class Admin extends Component {
                 <Card>
                 <CardContent>
                {eventItems}
+               </CardContent>
+               </Card>
+                </div>
+                Organizations
+                <div>
+                <Card>
+                <CardContent>
+                    <AdminOrganization />
+               </CardContent>
+               </Card>
+                </div>
+                Conventions
+                <div>
+                <Card>
+                <CardContent>
+                    <AdminConvention />
+               </CardContent>
+               </Card>
+                </div>
+                Users
+                <div>
+                <Card>
+                <CardContent>
+                    <AdminUserList />
                </CardContent>
                </Card>
                 </div>
