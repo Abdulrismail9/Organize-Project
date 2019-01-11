@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-// import Checkbox from '@material-ui/core/Checkbox';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import moment from 'moment';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+
 
 class EventList extends Component {
 
@@ -42,10 +41,10 @@ class EventList extends Component {
                 <Grid container
                     justify='center'>
                         {this.state.interested ?
-                            (<Button onClick={this.clickHandlerUninterested} size="medium" variant="outlined" color="primary">
+                            (<Button onClick={this.clickHandlerUninterested} size="medium" variant="outlined" color="secondary">
                                 not interested
                             </Button>) :
-                            (<Button onClick={this.clickHandler} size="medium" variant="outlined" color="primary">
+                            (<Button onClick={this.clickHandler} size="medium" variant="outlined" color="secondary">
                                 interested
                     </Button>)
                         }

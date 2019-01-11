@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import InfoPage from '../InfoPage/InfoPage';
+import OrganizationInfo from '../OrganizationInfo/OrganizationInfo';
+import ConventionInfo from '../ConventionInfo/ConventionInfo';
 
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
@@ -10,7 +11,8 @@ const UserPage = (props) => (
     <h1 id="welcome">
       Welcome, { props.user.username }!
     </h1>
-    <InfoPage />
+    <OrganizationInfo />
+    <ConventionInfo />
     
   </div>
 );

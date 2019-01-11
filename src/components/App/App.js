@@ -16,7 +16,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
+
 
 
 import './App.css';
@@ -51,11 +51,6 @@ class App extends Component {
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-            <ProtectedRoute
-              exact
-              path="/info"
-              component={InfoPage}
-            />
              <ProtectedRoute
               exact
               path="/Admin"
@@ -66,7 +61,7 @@ class App extends Component {
               path="/AdminCreate"
               component={AdminCreate}
             />
-             <ProtectedRoute
+             <ProtectedRoute className='list'
               exact
               path="/eventsPage"
               component={eventsPage}
