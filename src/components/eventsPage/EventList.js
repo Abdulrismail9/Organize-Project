@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import moment from 'moment';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid';    
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+
+
+const styles = {
+    card: {
+      maxWidth: 20,
+    },
+    media: {
+      objectFit: 'cover',
+    },
+  };
 
 
 class EventList extends Component {
@@ -36,10 +45,22 @@ class EventList extends Component {
     render() {
 
         return(
-            <List>
-                <ListItem>
-                <Grid container
-                    justify='center'>
+            <div>
+               <Card className="eventCards">
+               <CardActionArea>
+                 {this.props.name}
+                 <CardContent>
+                 <span>{moment(this.props.date).format('MMMM Do YYYY')}</span>
+                 <br></br>
+               <span>{this.props.time}</span>
+                 <br></br>
+             <span>{this.props.description}</span>
+                <br></br>
+             <span>{this.props.location}</span>
+                 </CardContent>
+               </CardActionArea>
+               <Grid container
+                    >
                         {this.state.interested ?
                             (<Button onClick={this.clickHandlerUninterested} size="medium" variant="outlined" color="secondary">
                                 not interested
@@ -49,25 +70,8 @@ class EventList extends Component {
                     </Button>)
                         }
                     </Grid>
-                    <ExpansionPanel>
-          <ExpansionPanelSummary >
-
-                 <div>{this.props.name}</div>
-                 
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-              <div>
-                 <span>{moment(this.props.date).format('MMMM Do YYYY')}</span>
-                 <span>{this.props.time}</span>
-                 <br></br>
-                 <span>{this.props.description}</span>
-                <br></br>
-                 <span>{this.props.location}</span>
-                 </div>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-                </ListItem>
-            </List>
+             </Card>
+             </div>
         )
     }
 }
@@ -76,4 +80,4 @@ const mapStateToProps = reduxStore => ({
 });
 
 
-export default connect(mapStateToProps)(EventList);
+export default withStyles(styles)(connect(mapStateToProps)(EventList));

@@ -6,20 +6,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+
 
 
 class AdminUserList extends Component {
 
-    state = {
-        checkedA: true,
-        checkedB: false,
-      };
-
-      handleChange = name => event => {
-        this.setState({ [name]: event.target.checked });
-      };
+   
     
     getListofUsers = () => {
         this.props.dispatch({ type: 'FETCH_USER_LIST' });
@@ -49,17 +41,6 @@ class AdminUserList extends Component {
                 return (
                   <TableRow key={list.id}>
                     <TableCell >{list.username}</TableCell>
-                    <FormControlLabel
-            control={
-              <Switch
-              checked={this.state.checkedA}
-              onChange={this.handleChange('checkedA')}
-              value="checkedA"
-              />
-              
-            }
-            label="Add Admin"
-          />
                     <Button size="small" variant="contained" color="secondary" onClick={() => this.removeUsers(list.id)}>Delete</Button>
                   </TableRow>
                 );

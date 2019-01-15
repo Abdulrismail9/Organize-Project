@@ -79,6 +79,20 @@ router.post('/interests', (req, res) => {
 
 });
 
+router.put('/admins', (req, res) => {
+    let sqlText = `UPDATE "person" SET "admin"= $1 WHERE id=$2;`;
+    console.log('admin post route', req.body);
+    pool.query(sqlText, [true, req.body.data ])
+        .then(result => {
+            res.sendStatus(201);
+        }).catch(err => {
+            console.log('error in post admin query:', err);
+            res.sendStatus(500);
+        })
+
+});
+
+
 // DELETE route
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     console.log('testing delete route', req.params.id);
@@ -189,22 +203,8 @@ router.put(`/:id/convention`, rejectUnauthenticated, (req, res) => {
     })
 })// end of PUT route
 
-router.put(`/:id/admins`, rejectUnauthenticated, (req, res) => {
-    const userId = req.params.id;
-    const {isAdmin } = req.body;
-    console.log('in put route', req.body);
-    const queryText = 
-    `UPDATE "person" SET "admin"=$1  
-    WHERE id=$2 ;`;
-    pool.query(queryText, [ isAdmin, userId] )
-    .then(result => {
-        res.sendStatus(204);
-    })
-    .catch( (error) => {
-        console.log('error in PUT', error);
-        res.sendStatus(500);
-    })
-})// end of PUT route
+
+
 
 
 

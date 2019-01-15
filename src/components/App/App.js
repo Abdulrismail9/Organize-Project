@@ -12,17 +12,20 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-// import ProtectedRoute2 from '../ProtectedRoute/ProtectedRoute2';
+
 
 
 import UserPage from '../UserPage/UserPage';
 
 
 
+
 import './App.css';
 import Admin from '../Admin/Admin.jsx';
 import eventsPage from '../eventsPage/eventsPage';
+import AdminRoute from '../AdminRoute/AdminRoute';
 import AdminCreate from '../Admin/AdminCreate';
+import ExplorePage from '../ExplorePage/ExplorePage.jsx';
 
 class App extends Component {
   componentDidMount () {
@@ -51,12 +54,12 @@ class App extends Component {
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-             <ProtectedRoute
+             <AdminRoute
               exact
               path="/Admin"
               component={Admin}
             />
-              <ProtectedRoute
+              <AdminRoute
               exact
               path="/AdminCreate"
               component={AdminCreate}
@@ -65,6 +68,11 @@ class App extends Component {
               exact
               path="/eventsPage"
               component={eventsPage}
+            />
+            <ProtectedRoute 
+              exact
+              path="/ExplorePage"
+              component={ExplorePage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

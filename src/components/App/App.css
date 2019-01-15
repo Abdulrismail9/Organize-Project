@@ -1,6 +1,8 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
+     /* background-image: url('./white.jpg');
+    background-size: 90%;  */
 }
 
 .alert {
@@ -9,7 +11,7 @@ body {
 }
 
 form {
-    background-color: #dbd5d5;
+    background-color:transparent;
     width: 30%;
     height: 250px;
     margin: 20px auto;
@@ -54,3 +56,8 @@ input {
     margin-right: auto;
     width: 40%;
 }
+
+.organizationStyles{
+    text-align: center;
+}
+

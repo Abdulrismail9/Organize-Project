@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import './Admin.css';
 import AdminOrganization from './AdminOrganization';
 import AdminConvention from './AdminConvention';
 import AdminUserList from './AdminUserList';
-
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 
 
 
@@ -79,15 +80,20 @@ class Admin extends Component {
             return (
                 <div key={event.id} >
                 {event.name} 
-                <CardActions>
-               <input type='text' name='name' placeholder='name' onChange={this.handleChangeFor} />
+                <ExpansionPanel>
+          <ExpansionPanelSummary >
+
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails className="adminCreate">
+                <input type='text' name='name' placeholder='name' onChange={this.handleChangeFor} />
                 <input type='text' name='date' placeholder='date' onChange={this.handleChangeFor} />
                 <input type='text' name='time' placeholder='time' onChange={this.handleChangeFor} />
                 <input type='text' name='location' placeholder='location' onChange={this.handleChangeFor} />
                 <input type='text' name='description' placeholder='description' onChange={this.handleChangeFor} />
                <Button size="small" variant="contained" color="primary" onClick={() => this.editEvent(event.id)}>Edit</Button>
                <Button size="small" variant="contained" color="secondary" onClick={() => this.removeEvent(event.id)}>Delete</Button>
-               </CardActions>
+          </ExpansionPanelDetails>
+          </ExpansionPanel>
                 </div>
             )
         })
@@ -103,12 +109,9 @@ class Admin extends Component {
                 </div>
                 Events
                 <div className="cards">
-                <Card>
-                <CardContent>
                {eventItems}
-               </CardContent>
-               </Card>
                 </div>
+                <div></div>
                 Organizations
                 <div>
                 <Card>

@@ -27,7 +27,8 @@ class eventsPage extends Component {
                         date={event.date} 
                         time={event.time}
                         description={event.description}
-                        location={event.location} />);
+                        location={event.location}
+                        image_url={event.image_url} />);
                 })}
                 
             </div>

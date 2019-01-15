@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 
+
 class InfoPage extends Component {
 
 
@@ -18,12 +19,14 @@ class InfoPage extends Component {
       let organizationItems = this.props.reduxStore.organization.map((org) => {
         return (
             <div key={org.id} >
-            {org.name} {org.description}
+            {org.name}
+            <div></div>
+             {org.description}
             </div>
         )
     })
         return(
-            <div>
+            <div className="organizationStyles">
                {organizationItems}
             </div>
         )

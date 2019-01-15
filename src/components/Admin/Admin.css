@@ -1,3 +1,24 @@
 .Cbtn {
     text-align: right;
 }
+.textFields {
+    padding-block-start: 70px;
+    text-align: center;
+
+}
+.adminCreate{
+    height: 50px;
+    width: 50px;
+    
+}
+.eventCards{
+    text-align: center;
+    width: 500px;
+    height: 200px;
+}
+
+.cards{
+    text-align: center;
+    width: 900px;
+    height: 200px;
+}

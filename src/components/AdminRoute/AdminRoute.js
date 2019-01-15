@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
-
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
 // API for this component is the same as a regular route
@@ -15,7 +14,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 // by checking req.isAuthenticated for authentication
 // and by checking req.user for authorization
 
-const ProtectedRoute = (props) => {
+const AdminRoute = (props) => {
   // Using destructuring, this takes ComponentToProtect from component
   // prop and grabs all other props to pass them along to Route
   const {
@@ -32,7 +31,7 @@ const ProtectedRoute = (props) => {
     // if the user is logged in (only logged in users have ids)
     // show the component that is protected
     ComponentToShow = ComponentToProtect;
-  } else if (loginMode === 'login') {
+  } else if (user.admin === false) {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
     ComponentToShow = LoginPage;
@@ -61,9 +60,10 @@ const mapStateToProps = (state) => {
   return {
     user: state.user,
     loginMode: state.loginMode,
+    admin: state.admin,
   }
 }
 
-export default connect(mapStateToProps)(ProtectedRoute)
+export default connect(mapStateToProps)(AdminRoute)
 
 

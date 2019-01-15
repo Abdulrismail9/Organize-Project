@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import OrganizationInfo from '../OrganizationInfo/OrganizationInfo';
 import ConventionInfo from '../ConventionInfo/ConventionInfo';
 
+
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 class ConventionInfo extends Component {
 
-
   componentDidMount () {
     this.getConvention();
   }
