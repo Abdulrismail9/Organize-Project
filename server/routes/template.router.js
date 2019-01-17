@@ -47,6 +47,20 @@ router.get('/count', (req, res) => {
 });
 
 
+router.get('/clickedInterest', (req, res) => {
+    let sql = `SELECT "events"."name" AS "events_name" FROM "events"
+    JOIN "Going_to_event" ON "Going_to_event"."event_id" = "events"."id"
+    JOIN "person" ON "person"."id" = "Going_to_event"."person_id"
+    WHERE "person"."id" = $1;`;
+    pool.query(sql, [req.user.id ]).then((response) => {
+        res.send(response.rows)
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    })
+});
+
+
 
 /**
  * POST route 

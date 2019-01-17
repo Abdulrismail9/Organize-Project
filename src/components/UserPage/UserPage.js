@@ -12,8 +12,12 @@ const UserPage = (props) => (
     <h1 id="welcome">
       Welcome, { props.user.username }!
     </h1>
-    <OrganizationInfo />
+    <div className="conventionInfo">
     <ConventionInfo />
+    </div>
+  <div className="orgInfo">
+    <OrganizationInfo />
+    </div>
     
   </div>
 );

@@ -17,7 +17,9 @@ class ConventionInfo extends Component {
       let conventionItems = this.props.reduxStore.convention.map((item) => {
         return (
             <div key={item.id} >
-            {item.name} {item.description}
+            {item.name}
+            <div></div>
+             {item.description}
             </div>
         )
     })

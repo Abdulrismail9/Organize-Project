@@ -3,20 +3,8 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';    
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
 
 
-const styles = {
-    card: {
-      maxWidth: 20,
-    },
-    media: {
-      objectFit: 'cover',
-    },
-  };
 
 
 class EventList extends Component {
@@ -46,10 +34,10 @@ class EventList extends Component {
 
         return(
             <div>
-               <Card className="eventCards">
-               <CardActionArea>
+               <div className="eventsContainer">
+                   </div>
                  {this.props.name}
-                 <CardContent>
+                
                  <span>{moment(this.props.date).format('MMMM Do YYYY')}</span>
                  <br></br>
                <span>{this.props.time}</span>
@@ -57,8 +45,7 @@ class EventList extends Component {
              <span>{this.props.description}</span>
                 <br></br>
              <span>{this.props.location}</span>
-                 </CardContent>
-               </CardActionArea>
+                 
                <Grid container
                     >
                         {this.state.interested ?
@@ -70,8 +57,8 @@ class EventList extends Component {
                     </Button>)
                         }
                     </Grid>
-             </Card>
              </div>
+         
         )
     }
 }
@@ -80,4 +67,4 @@ const mapStateToProps = reduxStore => ({
 });
 
 
-export default withStyles(styles)(connect(mapStateToProps)(EventList));
+export default connect(mapStateToProps)(EventList);

@@ -21,6 +21,7 @@ class InfoPage extends Component {
             <div key={org.id} >
             {org.name}
             <div></div>
+            <br/>
              {org.description}
             </div>
         )

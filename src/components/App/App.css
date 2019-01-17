@@ -1,8 +1,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
-     /* background-image: url('./white.jpg');
-    background-size: 90%;  */
+    background-color:#A48989;
 }
 
 .alert {
@@ -61,3 +60,14 @@ input {
     text-align: center;
 }
 
+.orgInfo{
+    display: grid;
+    height: 250px;
+    background-color:#8D6B6B;
+    width: 500px;
+    margin: 100px;
+}
+
+.eventsContainer{
+    text-align: center;
+}

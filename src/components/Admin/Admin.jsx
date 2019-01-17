@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import './Admin.css';
@@ -107,37 +105,24 @@ class Admin extends Component {
                 </Link>
                 </Button>
                 </div>
+                <div></div>
+                Organizations
+                <div className="adminOrg">
+                    <AdminOrganization />
+                </div>
+                Conventions
+                <div>
+                    <AdminConvention />
+                </div>
+                Users
+                <div>
+                    <AdminUserList />
+                </div>
                 Events
                 <div className="cards">
                {eventItems}
                 </div>
-                <div></div>
-                Organizations
-                <div>
-                <Card>
-                <CardContent>
-                    <AdminOrganization />
-               </CardContent>
-               </Card>
-                </div>
-                Conventions
-                <div>
-                <Card>
-                <CardContent>
-                    <AdminConvention />
-               </CardContent>
-               </Card>
-                </div>
-                Users
-                <div>
-                <Card>
-                <CardContent>
-                    <AdminUserList />
-               </CardContent>
-               </Card>
-                </div>
             </div>
-            
         )
     }
 }

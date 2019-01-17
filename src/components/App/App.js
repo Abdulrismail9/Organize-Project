@@ -25,7 +25,8 @@ import Admin from '../Admin/Admin.jsx';
 import eventsPage from '../eventsPage/eventsPage';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import AdminCreate from '../Admin/AdminCreate';
-import ExplorePage from '../ExplorePage/ExplorePage.jsx';
+import MyAgenda from '../MyAgenda/MyAgenda.jsx';
+
 
 class App extends Component {
   componentDidMount () {
@@ -71,8 +72,8 @@ class App extends Component {
             />
             <ProtectedRoute 
               exact
-              path="/ExplorePage"
-              component={ExplorePage}
+              path="/MyAgenda"
+              component={MyAgenda}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

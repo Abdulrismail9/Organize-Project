@@ -16,9 +16,8 @@ class eventsPage extends Component {
     }
 
     render() {
-        
         return(
-            <div>
+            <div className="eventCards">
                  {this.props.reduxStore.events.map((event) => {
                     return (<EventList 
                         key={event.id} 
