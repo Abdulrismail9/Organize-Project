@@ -8,7 +8,7 @@ class AccessDeniedView extends Component {
         
         return(
      <div className="accessPage">
-            Access Denied!  Bitch!  
+            Access Denied!   
       </div>
         )
     }
