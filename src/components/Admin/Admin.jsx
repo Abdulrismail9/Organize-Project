@@ -106,16 +106,17 @@ class Admin extends Component {
                 </Button>
                 </div>
                 <div></div>
-                Organizations
                 <div className="adminOrg">
+                Organizations
                     <AdminOrganization />
                 </div>
+                <div className="adminConvention">
                 Conventions
-                <div>
                     <AdminConvention />
                 </div>
+                
+                <div className="adminUsers">
                 Users
-                <div>
                     <AdminUserList />
                 </div>
                 Events

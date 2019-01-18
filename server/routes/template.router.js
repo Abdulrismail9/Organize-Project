@@ -36,7 +36,7 @@ router.get('/convention', rejectUnauthenticated, (req, res) => {
     })
 });
 
-router.get('/count', (req, res) => {
+router.get('/count', rejectUnauthenticated, (req, res) => {
     let sql = `SELECT * FROM "person";`
     pool.query(sql).then((response) => {
         res.send(response.rows)
@@ -47,8 +47,8 @@ router.get('/count', (req, res) => {
 });
 
 
-router.get('/clickedInterest', (req, res) => {
-    let sql = `SELECT "events"."name" AS "events_name" FROM "events"
+router.get('/clickedInterest', rejectUnauthenticated, (req, res) => {
+    let sql = `SELECT "events"."name" AS "events_name", "events"."time" AS "events_time","events"."location" AS "events_location" FROM "events"
     JOIN "Going_to_event" ON "Going_to_event"."event_id" = "events"."id"
     JOIN "person" ON "person"."id" = "Going_to_event"."person_id"
     WHERE "person"."id" = $1;`;
@@ -80,7 +80,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 });
 
-router.post('/interests', (req, res) => {
+router.post('/interests', rejectUnauthenticated, (req, res) => {
     let sqlText = `INSERT INTO "Going_to_event" ("person_id", "event_id")
     VALUES ($1, $2)`
     pool.query(sqlText, [req.body.person_id, req.body.event_id ])
@@ -93,7 +93,7 @@ router.post('/interests', (req, res) => {
 
 });
 
-router.put('/admins', (req, res) => {
+router.put('/admins', rejectUnauthenticated, (req, res) => {
     let sqlText = `UPDATE "person" SET "admin"= $1 WHERE id=$2;`;
     console.log('admin post route', req.body);
     pool.query(sqlText, [true, req.body.data ])
@@ -144,7 +144,7 @@ router.delete('/:id/convention', rejectUnauthenticated, (req, res) => {
     })
 })
 
-router.delete('/:id/count', (req, res) => {
+router.delete('/:id/count', rejectUnauthenticated, (req, res) => {
     console.log('testing delete route', req.params.id);
     let id = req.params.id
     let queryText = `DELETE FROM "person" WHERE id = $1;`;
@@ -156,7 +156,7 @@ router.delete('/:id/count', (req, res) => {
     })
 })
 
-router.delete('/interest/:id', (req, res) => {
+router.delete('/interest/:id', rejectUnauthenticated, (req, res) => {
     console.log('testing DElete route', req.body);
     let queryText = `DELETE FROM "Going_to_event" WHERE "person_id"=$1 AND "event_id"=$2;`;
     pool.query(queryText, [req.body.person_id, req.body.event_id]).then((result) => {
@@ -216,8 +216,6 @@ router.put(`/:id/convention`, rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     })
 })// end of PUT route
-
-
 
 
 

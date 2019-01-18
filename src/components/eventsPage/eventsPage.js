@@ -23,7 +23,7 @@ class eventsPage extends Component {
                         key={event.id} 
                         id={event.id} 
                         name={event.name} 
-                        date={event.date} 
+                        date={event.dates} 
                         time={event.time}
                         description={event.description}
                         location={event.location}

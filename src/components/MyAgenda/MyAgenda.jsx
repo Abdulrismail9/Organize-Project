@@ -22,6 +22,8 @@ class MyAgenda extends Component {
                 <div key={int.id} >
                 {int.events_name}
                 <div></div>
+                {int.events_location}
+                {int.events_time}
                 </div>
             )
         })

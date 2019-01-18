@@ -1,7 +1,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
-    background-color: lightgrey;
+    background-color: antiquewhite;
 }
 
 .alert {
@@ -56,26 +56,28 @@ input {
     width: 40%;
 }
 
-.organizationStyles{
-    text-align: center;
-}
+
 .conventionStyles{
     text-align: center;
 }
 
 .orgInfo{
     display: grid;
-    height: 250px;
+    height: 350px;
     width: 500px;
     text-align: center;
-    margin: flex;
+    margin-left: 400px;
+    margin-top: 10px;
+    background-color:lavenderblush;
+    border-radius: 15%;
 }
 
 .conventionInfo{
     display: inline-block;
     height: 250px;
-    width: 500px;
-    margin: flex;
+    width: 1250px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
 }
 
 .eventsContainer{
@@ -105,3 +107,4 @@ input {
     font-size: 50px;
     text-align: center;
 }
+

@@ -3,7 +3,6 @@ import {Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import AccessDeniedView from '../AccessDeniedView/AccessDeniedView';
 
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
@@ -48,7 +47,7 @@ const AdminRoute = (props) => {
         // all props like 'exact' and 'path' that were passed in
         // are now passed along to the 'Route' Component
         {...otherProps}
-        component={AccessDeniedView}
+        component={ComponentToShow}
       />
   )
 }

@@ -9,16 +9,33 @@
 .adminCreate{
     height: 50px;
     width: 50px;
-    
+    background-color: antiquewhite;
 }
-/* .eventCards{
+
+.adminOrg{
+    display: grid;
+    width: 900px;
     text-align: center;
-    width: 500px;
-    height: 200px;
-} */
+}
+
+.adminConvention{
+    display: grid;
+    width: 900px; 
+    text-align: center;
+}
+.adminUsers{
+    display: grid;
+    width: 1000px; 
+    text-align: center;
+}
 
 .cards{
     text-align: center;
     width: 900px;
     height: 200px;
+    
+}
+
+.editCard{
+    background-color: aquamarine;
 }

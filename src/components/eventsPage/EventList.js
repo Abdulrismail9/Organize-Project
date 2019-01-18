@@ -39,7 +39,7 @@ class EventList extends Component {
                    </div>
                  {this.props.name}
                 <div></div>
-                 <span>{moment(this.props.date).format('MMMM Do YYYY')}</span>
+                 <span>{moment(this.props.dates).format('MMMM Do YYYY')}</span>
                  <br></br>
                <span>{this.props.time}</span>
                  <br></br>

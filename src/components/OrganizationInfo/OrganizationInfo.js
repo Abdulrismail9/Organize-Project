@@ -22,7 +22,15 @@ class InfoPage extends Component {
             {org.name}
             <div></div>
             <br/>
+            Description:
+            <br/>
              {org.description}
+             <div></div>
+            <br/>
+            phone number: 
+            <br/>
+            {org.phone_number}
+            <div></div>
             </div>
         )
     })
