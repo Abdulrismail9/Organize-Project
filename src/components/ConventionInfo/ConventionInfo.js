@@ -19,12 +19,13 @@ class ConventionInfo extends Component {
             <div key={item.id} >
             {item.name}
             <div></div>
+            <br/>
              {item.description}
             </div>
         )
     })
         return(
-            <div>
+            <div className="conventionStyles">
                {conventionItems}
             </div>
         )

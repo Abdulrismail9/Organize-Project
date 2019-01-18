@@ -33,11 +33,12 @@ class EventList extends Component {
     render() {
 
         return(
-            <div>
-               <div className="eventsContainer">
+            <div className="eventsContainer">
+                
+               <div>
                    </div>
                  {this.props.name}
-                
+                <div></div>
                  <span>{moment(this.props.date).format('MMMM Do YYYY')}</span>
                  <br></br>
                <span>{this.props.time}</span>
@@ -45,11 +46,11 @@ class EventList extends Component {
              <span>{this.props.description}</span>
                 <br></br>
              <span>{this.props.location}</span>
-                 
+                <div className="interestBtn"> 
                <Grid container
                     >
                         {this.state.interested ?
-                            (<Button onClick={this.clickHandlerUninterested} size="medium" variant="outlined" color="secondary">
+                            (<Button  onClick={this.clickHandlerUninterested} size="medium" variant="outlined" color="secondary">
                                 not interested
                             </Button>) :
                             (<Button onClick={this.clickHandler} size="medium" variant="outlined" color="secondary">
@@ -57,6 +58,7 @@ class EventList extends Component {
                     </Button>)
                         }
                     </Grid>
+                    </div>
              </div>
          
         )

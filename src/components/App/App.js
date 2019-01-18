@@ -26,6 +26,7 @@ import eventsPage from '../eventsPage/eventsPage';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import AdminCreate from '../Admin/AdminCreate';
 import MyAgenda from '../MyAgenda/MyAgenda.jsx';
+import AccessDeniedView from '../AccessDeniedView/AccessDeniedView';
 
 
 class App extends Component {
@@ -69,6 +70,11 @@ class App extends Component {
               exact
               path="/eventsPage"
               component={eventsPage}
+            />
+            <ProtectedRoute className='Acee'
+              exact
+              path="/AccessDeniedView"
+              component={AccessDeniedView}
             />
             <ProtectedRoute 
               exact

@@ -38,5 +38,4 @@ class eventsPage extends Component {
 const mapReduxStateToProps = (reduxStore) => ({
     reduxStore
 })
-
 export default connect(mapReduxStateToProps)(eventsPage);

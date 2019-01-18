@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 class MyAgenda extends Component {
 
@@ -21,9 +26,20 @@ class MyAgenda extends Component {
             )
         })
         return(
-            <div>
+            <div className="tableDiv">
+                <Table >
+        <TableHead>
+          <TableRow>
+            <TableCell>Event List</TableCell>
+            </TableRow>
+        </TableHead>
+        <TableBody>
+                <br/>
             {interestItems}
-            </div>
+            
+            </TableBody>
+      </Table>
+      </div>
         )
     }
 }
