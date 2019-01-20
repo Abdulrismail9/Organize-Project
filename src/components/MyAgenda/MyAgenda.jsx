@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
+
 
 class MyAgenda extends Component {
 
+    componentDidUpdate () {
+        console.log('did update', this.props.reduxStore.interested)
+    }
+
     componentDidMount () {
         this.getAgenda();
+        console.log('did update', this.props.reduxStore.interested)
     }
   
     getAgenda  ()  {
@@ -19,28 +24,27 @@ class MyAgenda extends Component {
     render() {
         let interestItems = this.props.reduxStore.interested.map((int) => {
             return (
+                <div  className="tableDiv">
+                <Card>
+                    <CardContent>
                 <div key={int.id} >
                 {int.events_name}
                 <div></div>
                 {int.events_location}
+                <div></div>
                 {int.events_time}
+                </div>
+                </CardContent>
+                </Card>
                 </div>
             )
         })
         return(
-            <div className="tableDiv">
-                <Table >
-        <TableHead>
-          <TableRow>
-            <TableCell>Event List</TableCell>
-            </TableRow>
-        </TableHead>
-        <TableBody>
-                <br/>
-            {interestItems}
-            
-            </TableBody>
-      </Table>
+            <div>
+            <Typography  gutterBottom>
+                 My Events
+            </Typography>
+        {interestItems}
       </div>
         )
     }

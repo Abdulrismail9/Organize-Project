@@ -189,9 +189,9 @@ router.put(`/:id/org`, rejectUnauthenticated, (req, res) => {
     const orgId = req.params.id;
     const {name, description} = req.body;
     console.log('in put route', req.body);
-    const queryText = `UPDATE "Organization" SET "name"=$1, "description"=$2
-    WHERE id=$3;`;
-    pool.query(queryText, [name, description, orgId ] )
+    const queryText = `UPDATE "Organization" SET "name"=$1, "description"=$2, "phone_number"=$3
+    WHERE id=$4;`;
+    pool.query(queryText, [name, description, phone_number, orgId ] )
     .then(result => {
         res.sendStatus(204);
     })
